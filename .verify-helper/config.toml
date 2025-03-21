@@ -1,4 +1,0 @@
-[languages.mojo]
-compile = "magic run mojo build -o a.out {path} -I {basedir}"
-execute = "./a.out"
-verification_file_suffix = ".test.mojo"
