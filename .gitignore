@@ -1,0 +1,9 @@
+/.verify-helper/
+# !/.verify-helper/
+
+/.vscode/
+
+a.out
+
+/.magic/
+/magic.lock
