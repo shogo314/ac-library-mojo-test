@@ -1,29 +1,21 @@
-# verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind
+# verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_A
 
-from atcoder import IO, UnionFindPlus, modint998244353
+from atcoder import DSU, IO
 
 
 fn main() raises:
     var io = IO()
-    var N = io.nextInt()
-    var Q = io.nextInt()
-    var uf = UnionFindPlus[modint998244353](N)
-    for _ in range(Q):
-        var t = io.nextInt()
-        var u = io.nextInt()
-        var v = io.nextInt()
-        if t == 0:
-            x = io.nextInt()
-            if uf.same(u, v):
-                if uf.diff(v, u) == x:
-                    print(1)
-                else:
-                    print(0)
-            else:
-                print(1)
-                _ = uf.merge(v, u, modint998244353(x))
+    var n = io.nextInt()
+    var q = io.nextInt()
+    var dsu = DSU(n)
+    for _ in range(q):
+        var com = io.nextInt()
+        var x = io.nextInt()
+        var y = io.nextInt()
+        if com == 0:
+            _ = dsu.merge(x, y)
         else:
-            if uf.same(u, v):
-                print(uf.diff(v, u).val)
+            if dsu.same(x, y):
+                print(1)
             else:
-                print(-1)
+                print(0)

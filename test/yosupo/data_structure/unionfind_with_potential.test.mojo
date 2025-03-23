@@ -1,6 +1,8 @@
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind_with_potential
 
-from atcoder import IO, UnionFindPlus, modint998244353
+from atcoder.io import IO
+from atcoder.ext.potentialized_unionfind import UnionFindPlus
+from atcoder.modint import modint998244353
 
 
 fn main() raises:

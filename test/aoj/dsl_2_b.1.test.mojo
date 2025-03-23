@@ -1,6 +1,7 @@
 # verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_2_B
 
-from atcoder import FenwickTree, IO
+from atcoder.io import IO
+from atcoder.fenwicktree import FenwickTree
 
 
 fn main() raises:

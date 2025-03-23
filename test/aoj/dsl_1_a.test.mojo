@@ -1,7 +1,7 @@
 # verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_A
 
-from atcoder import DSU, IO
-
+from atcoder.io import IO
+from atcoder.dsu import DSU
 
 fn main() raises:
     var io = IO()

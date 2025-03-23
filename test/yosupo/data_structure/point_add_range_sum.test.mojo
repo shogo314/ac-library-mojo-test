@@ -1,6 +1,8 @@
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/point_add_range_sum
 
-from atcoder import FenwickTree,IO
+from atcoder.io import IO
+from atcoder.fenwicktree import FenwickTree
+
 
 fn main() raises:
     var io = IO()

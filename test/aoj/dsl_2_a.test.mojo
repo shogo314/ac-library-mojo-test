@@ -1,7 +1,7 @@
 # verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_2_A
 
-from atcoder import Segtree, IO
-
+from atcoder.io import IO
+from atcoder.segtree import Segtree
 
 fn main() raises:
     var io = IO()

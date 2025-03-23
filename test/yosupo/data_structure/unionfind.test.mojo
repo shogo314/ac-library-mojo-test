@@ -1,6 +1,8 @@
 # verification-helper: PROBLEM https://judge.yosupo.jp/problem/unionfind
 
-from atcoder import DSU,IO
+from atcoder.io import IO
+from atcoder.dsu import DSU
+
 
 fn main() raises:
     var io = IO()

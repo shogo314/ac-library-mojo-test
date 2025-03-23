@@ -1,6 +1,7 @@
 # verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_2_B
 
-from atcoder import Segtree, IO
+from atcoder.io import IO
+from atcoder.segtree import Segtree
 
 
 fn add(x: Int, y: Int) -> Int:

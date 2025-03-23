@@ -1,6 +1,7 @@
 # verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_2_B
 
-from atcoder import RSumQ, IO
+from atcoder.io import IO
+from atcoder.segtree import RSumQ
 
 
 fn main() raises:

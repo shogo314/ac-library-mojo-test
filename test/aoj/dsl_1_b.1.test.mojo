@@ -1,6 +1,7 @@
 # verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_B
 
-from atcoder import PotentializedUnionFind, IO
+from atcoder.io import IO
+from atcoder.ext.potentialized_unionfind import PotentializedUnionFind
 
 
 fn add(x: Int, y: Int) -> Int:
