@@ -2,7 +2,7 @@ from testing import assert_true
 from atcoder.internal_math import inv_gcd
 
 
-struct static_modint[M: Int](CollectionElement):
+struct static_modint[M: Int](CollectionElement, Writable):
     var val: Int
 
     fn __init__(out self):
@@ -121,5 +121,13 @@ struct static_modint[M: Int](CollectionElement):
     fn __ne__(self, rhs: Int) -> Bool:
         return self != Self(rhs)
 
+    fn write_to[W: Writer](self, mut writer: W):
+        writer.write(self.val)
+
+    fn __int__(self) -> Int:
+        return self.val
+
 
 alias modint998244353 = static_modint[998244353]
+alias modint1000000007 = static_modint[1000000007]
+alias modint1000000009 = static_modint[1000000009]

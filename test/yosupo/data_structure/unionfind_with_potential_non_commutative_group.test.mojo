@@ -37,9 +37,7 @@ struct Matrix_2x2(CollectionElement):
         )
 
     fn write_to[W: Writer](self, mut writer: W):
-        writer.write(
-            self.a.val, " ", self.b.val, " ", self.c.val, " ", self.d.val
-        )
+        writer.write(self.a, " ", self.b, " ", self.c, " ", self.d)
 
 
 fn op(x: Matrix_2x2, y: Matrix_2x2) -> Matrix_2x2:

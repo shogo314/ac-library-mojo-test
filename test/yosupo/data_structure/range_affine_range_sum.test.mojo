@@ -86,15 +86,7 @@ fn main() raises:
             var b = io.nextInt()
             var c = io.nextInt()
             seg.apply(l, r, Affine(mint(b), mint(c)))
-            # for i in range(l, r):
-            #     seg.apply(i, Affine(mint(b), mint(c)))
         else:
             var l = io.nextInt()
             var r = io.nextInt()
-            for i in range(1, seg.size):
-                seg.push(i)
-            print(seg)
-            var ans = seg.prod(l, r).value
-            # for i in range(l, r):
-            #     ans += seg.prod(i, i + 1).value
-            print(ans)
+            print(seg.prod(l, r).value)
