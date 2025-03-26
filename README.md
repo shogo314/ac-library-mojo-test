@@ -27,6 +27,8 @@ max = "=25.1.0"
 [languages.mojo]
 compile = "magic run mojo build -o a.out {path} -I {basedir}"
 execute = "./a.out"
+bundle = "false"
+list_dependencies = "python list_dependencies.py {path}"
 verification_file_suffix = ".test.mojo"
 
 ```
@@ -66,8 +68,6 @@ oj-verify run
 ```
 
 で実行出来ます。
-
-現状、依存関係の解析が出来てません。やる気のある方がいれば大変助かります。
 
 ## vscodeの拡張の設定
 
