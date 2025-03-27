@@ -1,5 +1,6 @@
-trait WritableElement(CollectionElement,Writable):
+trait WritableElement(CollectionElement, Writable):
     pass
+
 
 struct IO:
     var buff: String
@@ -24,6 +25,16 @@ struct IO:
             self.idx += 1
         return "".join(res)
 
+    fn readline(mut self) raises -> String:
+        var res = List[String]()
+        while self.idx < len(self.buff):
+            if self.buff[self.idx] == "\n":
+                self.idx += 1
+                break
+            res.append(self.buff[self.idx])
+            self.idx += 1
+        return "".join(res)
+
     fn nextInt(mut self) raises -> Int:
         return Int(self.next())
 
@@ -31,6 +42,6 @@ struct IO:
     fn print[S: WritableElement](v: List[S]):
         for i in range(len(v)):
             if i:
-                print(" ",end="")
-            print(v[i],end="")
+                print(" ", end="")
+            print(v[i], end="")
         print()

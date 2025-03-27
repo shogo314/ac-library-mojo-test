@@ -3,6 +3,7 @@
 from atcoder.io import IO
 from atcoder.segtree import Segtree
 
+
 fn main() raises:
     var io = IO()
     var n = io.nextInt()

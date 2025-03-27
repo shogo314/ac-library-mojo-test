@@ -1,22 +1,19 @@
-# verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_1_A
+# verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_2_A
 
 from atcoder.io import IO
-from atcoder.dsu import DSU
+from atcoder.segtree import RMinQ
 
 
 fn main() raises:
     var io = IO()
     var n = io.nextInt()
     var q = io.nextInt()
-    var dsu = DSU(n)
+    var seg = RMinQ[Int](n, 2**31 - 1)
     for _ in range(q):
         var com = io.nextInt()
         var x = io.nextInt()
         var y = io.nextInt()
         if com == 0:
-            _ = dsu.merge(x, y)
+            seg.set(x, y)
         else:
-            if dsu.same(x, y):
-                print(1)
-            else:
-                print(0)
+            print(seg.prod(x, y + 1))

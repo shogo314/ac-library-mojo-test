@@ -87,3 +87,31 @@ fn RMulQ[S: RMulQElement](n: Int) -> Segtree[S]:
         return x * y
 
     return Segtree[S](n, mul, S(1))
+
+
+trait RMaxQElement(CollectionElement, Comparable):
+    pass
+
+
+fn RMaxQ[S: RMaxQElement](n: Int, MIN: S) -> Segtree[S]:
+    fn op(x: S, y: S) -> S:
+        if x < y:
+            return y
+        else:
+            return x
+
+    return Segtree[S](n, op, MIN)
+
+
+trait RMinQElement(CollectionElement, Comparable):
+    pass
+
+
+fn RMinQ[S: RMaxQElement](n: Int, MAX: S) -> Segtree[S]:
+    fn op(x: S, y: S) -> S:
+        if x > y:
+            return y
+        else:
+            return x
+
+    return Segtree[S](n, op, MAX)
