@@ -52,7 +52,7 @@ struct static_modint[M: Int](CollectionElement, Writable):
     fn __neg__(self) -> Self:
         return Self() - self
 
-    fn __pow__(self, n: Int) raises -> Self:
+    fn pow(self, n: Int) raises -> Self:
         assert_true(0 <= n)
         var x = self
         var r = Self(1)
@@ -63,6 +63,9 @@ struct static_modint[M: Int](CollectionElement, Writable):
             x = x * x
             t >>= 1
         return r
+    
+    fn __pow__(self, n: Int) raises -> Self:
+        return self.pow(n)
 
     fn inv(self) raises -> Self:
         eg = inv_gcd(self.val, M)
