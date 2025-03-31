@@ -1,4 +1,5 @@
 from testing import assert_true
+
 import atcoder.internal_math
 
 

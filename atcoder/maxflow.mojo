@@ -1,56 +1,26 @@
 from testing import assert_true
-from atcoder.internal_type_traits import HasAdd, HasSub
 from collections import Deque
+
+from atcoder.internal_type_traits import HasAdd, HasSub
 
 
 trait Capable(CollectionElement, Defaultable, HasAdd, HasSub, Comparable):
     pass
 
 
+@value
 struct Edge[Cap: Capable](CollectionElement):
     var src: Int
     var dst: Int
     var cap: Cap
     var flow: Cap
 
-    fn __init__(out self, src: Int, dst: Int, cap: Cap, flow: Cap):
-        self.src = src
-        self.dst = dst
-        self.cap = cap
-        self.flow = flow
 
-    fn __copyinit__(out self, o: Self):
-        self.src = o.src
-        self.dst = o.dst
-        self.cap = o.cap
-        self.flow = o.flow
-
-    fn __moveinit__(out self, owned o: Self):
-        self.src = o.src
-        self.dst = o.dst
-        self.cap = o.cap
-        self.flow = o.flow
-
-
+@value
 struct _Edge[Cap: Capable](CollectionElement):
     var dst: Int
     var rev: Int
     var cap: Cap
-
-    fn __init__(out self, dst: Int, rev: Int, cap: Cap):
-        self.dst = dst
-        self.rev = rev
-        self.cap = cap
-
-    fn __copyinit__(out self, o: Self):
-        self.dst = o.dst
-        self.rev = o.rev
-        self.cap = o.cap
-
-    fn __moveinit__(out self, owned o: Self):
-        self.dst = o.dst
-        self.rev = o.rev
-        self.cap = o.cap
 
 
 struct MFGraph[Cap: Capable]:

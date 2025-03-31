@@ -1,4 +1,5 @@
 from testing import assert_true
+
 from atcoder.internal_math import inv_gcd
 
 
@@ -63,7 +64,7 @@ struct static_modint[M: Int](CollectionElement, Writable):
             x = x * x
             t >>= 1
         return r
-    
+
     fn __pow__(self, n: Int) raises -> Self:
         return self.pow(n)
 

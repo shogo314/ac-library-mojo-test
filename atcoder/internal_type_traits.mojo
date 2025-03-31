@@ -2,6 +2,7 @@ trait HasAdd:
     fn __add__(self, x: Self) -> Self:
         pass
 
+
 trait HasSub:
     fn __sub__(self, x: Self) -> Self:
         pass
@@ -25,4 +26,3 @@ trait HasTruediv:
 trait HasInitIntLiteral:
     fn __init__(out self, x: IntLiteral):
         pass
-

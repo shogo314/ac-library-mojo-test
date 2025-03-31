@@ -1,12 +1,11 @@
 from testing import assert_true
 
-trait Group(CollectionElement, Defaultable):
-    fn __init__(out self):
-        pass
-    fn __add__(self, x: Self) -> Self:
-        pass
-    fn __sub__(self, x: Self) -> Self:
-        pass
+from atcoder.internal_type_traits import HasAdd, HasSub
+
+
+trait Group(CollectionElement, Defaultable, HasAdd, HasSub):
+    pass
+
 
 struct FenwickTree[T: Group]:
     var _n: Int
