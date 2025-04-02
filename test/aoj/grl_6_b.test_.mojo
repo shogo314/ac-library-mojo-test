@@ -1,7 +1,7 @@
 # verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/GRL_6_B
 
 from atcoder.io import IO
-from atcoder.maxflow import MFGraph
+from atcoder.mincostflow import MCFGraph
 
 
 fn main() raises:
@@ -9,10 +9,10 @@ fn main() raises:
     var n = io.nextInt()
     var m = io.nextInt()
     var f = io.nextInt()
-    var mf_graph = MFGraph[Int](n)
+    var mcf_graph = MCFGraph[Int,Int](n)
     for _ in range(m):
         var u = io.nextInt()
         var v = io.nextInt()
         var c = io.nextInt()
-        _ = mf_graph.add_edge(u, v, c)
-    print(mf_graph.flow(0, n - 1, Int.MAX))
+        var d = io.nextInt()
+        _ = mcf_graph.add_edge(u, v, c, d)
