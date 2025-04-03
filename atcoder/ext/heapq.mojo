@@ -85,6 +85,9 @@ struct Heap[S: HeapElement]:
 
     fn pop(mut self) raises -> S:
         return heappop(self.data)
+    
+    fn clear(mut self):
+        self.data.clear()
 
     fn __bool__(self) -> Bool:
         return len(self.data)

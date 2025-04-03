@@ -9,10 +9,15 @@ fn main() raises:
     var n = io.nextInt()
     var m = io.nextInt()
     var f = io.nextInt()
-    var mcf_graph = MCFGraph[Int,Int](n)
+    var mcf_graph = MCFGraph(n)
     for _ in range(m):
         var u = io.nextInt()
         var v = io.nextInt()
         var c = io.nextInt()
         var d = io.nextInt()
         _ = mcf_graph.add_edge(u, v, c, d)
+    var ans = mcf_graph.flow(0, n - 1, f)
+    if ans[0] == f:
+        print(ans[1])
+    else:
+        print(-1)
