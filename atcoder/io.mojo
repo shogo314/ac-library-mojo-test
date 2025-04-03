@@ -1,7 +1,3 @@
-trait WritableElement(CollectionElement, Writable):
-    pass
-
-
 struct IO:
     var buff: String
     var idx: Int
@@ -39,7 +35,7 @@ struct IO:
         return Int(self.next())
 
     @staticmethod
-    fn print[S: WritableElement](v: List[S]):
+    fn print[S: WritableCollectionElement](v: List[S]):
         for i in range(len(v)):
             if i:
                 print(" ", end="")

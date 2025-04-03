@@ -4,4 +4,4 @@ name = "mojo"
 platforms = ["linux-64"]
 
 [dependencies]
-max = "=25.1.0"
+max = "=25.2.0"

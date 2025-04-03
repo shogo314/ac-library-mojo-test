@@ -1,7 +1,9 @@
 from testing import assert_true
 
+from atcoder.method_traits import HasLt
 
-trait HeapElement(CollectionElement, Comparable, Writable):
+
+trait HeapElement(CollectionElement, HasLt):
     pass
 
 
@@ -50,7 +52,6 @@ struct IntervalHeap[S: HeapElement]:
             return res
 
     fn push(mut self, item: S):
-        # print("push", item)
         var k = len(self.data)
         self.data.append(item)
         _ = self._up(k)

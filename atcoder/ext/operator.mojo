@@ -1,4 +1,4 @@
-from atcoder.internal_type_traits import (
+from atcoder.method_traits import (
     HasInitIntLiteral,
     HasAdd,
     HasNeg,
