@@ -2,7 +2,6 @@ from testing import assert_true
 from collections import Deque
 
 from atcoder.internal_csr import CSR
-from atcoder.method_traits import HasAdd, HasSub, HasMul, HasInitIntLiteral
 from atcoder.ext.heapq import Heap
 
 alias Cap = Int
