@@ -1,7 +1,7 @@
 from testing import assert_true
 
 from atcoder.internal_bit import bit_ceil, countr_zero
-from atcoder.internal_type_traits import HasAdd, HasInitIntLiteral, HasMul
+from atcoder.method_traits import HasAdd, HasInitIntLiteral, HasMul
 
 
 struct Segtree[S: CollectionElement]:

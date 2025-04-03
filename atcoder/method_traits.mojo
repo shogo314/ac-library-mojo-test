@@ -23,6 +23,11 @@ trait HasTruediv:
         pass
 
 
+trait HasLt:
+    fn __lt__(self, x: Self) -> Bool:
+        pass
+
+
 trait HasInitIntLiteral:
     fn __init__(out self, x: IntLiteral):
         pass

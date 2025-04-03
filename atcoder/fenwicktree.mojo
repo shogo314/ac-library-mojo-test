@@ -1,6 +1,6 @@
 from testing import assert_true
 
-from atcoder.internal_type_traits import HasAdd, HasSub
+from atcoder.method_traits import HasAdd, HasSub
 
 
 trait Group(CollectionElement, Defaultable, HasAdd, HasSub):

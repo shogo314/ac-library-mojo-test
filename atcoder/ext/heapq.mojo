@@ -1,7 +1,8 @@
 from testing import assert_true
 
+from atcoder.method_traits import HasLt
 
-trait HeapElement(CollectionElement, Comparable):
+trait HeapElement(CollectionElement, HasLt):
     pass
 
 
@@ -10,7 +11,7 @@ fn heappush[S: HeapElement](mut heap: List[S], item: S):
     heap.append(item)
     while k:
         var nk = (k - 1) >> 1
-        if heap[nk] > heap[k]:
+        if heap[k] < heap[nk]:
             heap.swap_elements(k, nk)
             k = nk
         else:
@@ -29,7 +30,7 @@ fn heappop[S: HeapElement](mut heap: List[S]) raises -> S:
 
 fn heappushpop[S: HeapElement](mut heap: List[S], item: S) -> S:
     if len(heap):
-        if item <= heap[0]:
+        if not heap[0] < item:
             return item
         else:
             var res = heap[0]
@@ -58,9 +59,9 @@ fn _heapify[S: HeapElement](mut heap: List[S], k: Int):
         pass
     else:
         var nk = 2 * k + 1
-        if 2 * k + 2 < len(heap) and heap[2 * k + 1] > heap[2 * k + 2]:
+        if 2 * k + 2 < len(heap) and heap[2 * k + 2] < heap[2 * k + 1]:
             nk = 2 * k + 2
-        if heap[k] > heap[nk]:
+        if heap[nk] < heap[k]:
             heap.swap_elements(k, nk)
             _heapify(heap, nk)
 

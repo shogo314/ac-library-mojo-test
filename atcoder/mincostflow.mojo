@@ -2,7 +2,7 @@ from testing import assert_true
 from collections import Deque
 
 from atcoder.internal_csr import CSR
-from atcoder.internal_type_traits import HasAdd, HasSub
+from atcoder.method_traits import HasAdd, HasSub
 
 
 trait Capable(CollectionElement, Defaultable, HasAdd, HasSub, Comparable):
