@@ -1,4 +1,5 @@
 from atcoder.method_traits import HasEqCollectionElement
+from atcoder.ext.string import string_to_list
 
 
 fn z_algorithm[S: HasEqCollectionElement](s: List[S]) -> List[Int]:
@@ -21,7 +22,4 @@ fn z_algorithm[S: HasEqCollectionElement](s: List[S]) -> List[Int]:
 
 
 fn z_algorithm(s: String) -> List[Int]:
-    var s2 = List[Int](0) * len(s)
-    for i in range(len(s)):
-        s2[i] = ord(s[i])
-    return z_algorithm(s2)
+    return z_algorithm(string_to_list(s))
