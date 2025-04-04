@@ -1,12 +1,9 @@
 from testing import assert_true
 
-from atcoder.method_traits import HasLt
-
-trait HeapElement(CollectionElement, HasLt):
-    pass
+from atcoder.method_traits import HasLtCollectionElement
 
 
-fn heappush[S: HeapElement](mut heap: List[S], item: S):
+fn heappush[S: HasLtCollectionElement](mut heap: List[S], item: S):
     var k = len(heap)
     heap.append(item)
     while k:
@@ -18,7 +15,7 @@ fn heappush[S: HeapElement](mut heap: List[S], item: S):
             break
 
 
-fn heappop[S: HeapElement](mut heap: List[S]) raises -> S:
+fn heappop[S: HasLtCollectionElement](mut heap: List[S]) raises -> S:
     assert_true(len(heap))
     if len(heap) == 1:
         return heap.pop()
@@ -28,7 +25,7 @@ fn heappop[S: HeapElement](mut heap: List[S]) raises -> S:
     return res
 
 
-fn heappushpop[S: HeapElement](mut heap: List[S], item: S) -> S:
+fn heappushpop[S: HasLtCollectionElement](mut heap: List[S], item: S) -> S:
     if len(heap):
         if not heap[0] < item:
             return item
@@ -41,12 +38,14 @@ fn heappushpop[S: HeapElement](mut heap: List[S], item: S) -> S:
         return item
 
 
-fn heapify[S: HeapElement](mut heap: List[S]):
+fn heapify[S: HasLtCollectionElement](mut heap: List[S]):
     for i in reversed(range(len(heap))):
         _heapify(heap, i)
 
 
-fn heapreplace[S: HeapElement](mut heap: List[S], item: S) raises -> S:
+fn heapreplace[
+    S: HasLtCollectionElement
+](mut heap: List[S], item: S) raises -> S:
     assert_true(len(heap))
     var res = heap[0]
     heap[0] = item
@@ -54,7 +53,7 @@ fn heapreplace[S: HeapElement](mut heap: List[S], item: S) raises -> S:
     return res
 
 
-fn _heapify[S: HeapElement](mut heap: List[S], k: Int):
+fn _heapify[S: HasLtCollectionElement](mut heap: List[S], k: Int):
     if len(heap) <= 2 * k + 1:
         pass
     else:
@@ -66,7 +65,7 @@ fn _heapify[S: HeapElement](mut heap: List[S], k: Int):
             _heapify(heap, nk)
 
 
-struct Heap[S: HeapElement]:
+struct Heap[S: HasLtCollectionElement]:
     var data: List[S]
 
     fn __init__(out self):
@@ -85,7 +84,7 @@ struct Heap[S: HeapElement]:
 
     fn pop(mut self) raises -> S:
         return heappop(self.data)
-    
+
     fn clear(mut self):
         self.data.clear()
 

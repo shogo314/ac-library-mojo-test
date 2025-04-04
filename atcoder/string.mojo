@@ -1,8 +1,7 @@
-trait StringElement(CollectionElement, Comparable):
-    pass
+from atcoder.method_traits import HasEqCollectionElement
 
 
-fn z_algorithm[S: StringElement](s: List[S]) -> List[Int]:
+fn z_algorithm[S: HasEqCollectionElement](s: List[S]) -> List[Int]:
     var n = len(s)
     if n == 0:
         return List[Int]()

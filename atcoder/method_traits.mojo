@@ -28,6 +28,19 @@ trait HasLt:
         pass
 
 
+trait HasEq:
+    fn __eq__(self, x: Self) -> Bool:
+        pass
+
+
 trait HasInitIntLiteral:
     fn __init__(out self, x: IntLiteral):
         pass
+
+
+trait HasLtCollectionElement(CollectionElement, HasLt):
+    pass
+
+
+trait HasEqCollectionElement(CollectionElement, HasEq):
+    pass

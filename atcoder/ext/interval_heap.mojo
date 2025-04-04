@@ -1,13 +1,9 @@
 from testing import assert_true
 
-from atcoder.method_traits import HasLt
+from atcoder.method_traits import HasLtCollectionElement
 
 
-trait HeapElement(CollectionElement, HasLt):
-    pass
-
-
-struct IntervalHeap[S: HeapElement]:
+struct IntervalHeap[S: HasLtCollectionElement]:
     var data: List[S]
 
     fn __init__(out self):
