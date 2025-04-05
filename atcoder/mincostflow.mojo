@@ -105,7 +105,7 @@ struct MCFGraph:
         var vis = List[Bool](False) * self._n
 
         var que_min = List[Int]()
-        var que = Heap[_Q]()
+        var que = PriorityQueue[_Q]()
 
         var flow = Cap()
         var cost = Cost(0)
@@ -167,9 +167,7 @@ struct MCFGraph:
             while v != s:
                 var e = g.elist[prev_e[v]]
                 g.elist[prev_e[v]].cap = e.cap + c
-                g.elist[e.rev].cap = (
-                    g.elist[e.rev].cap - c
-                )
+                g.elist[e.rev].cap = g.elist[e.rev].cap - c
                 v = g.elist[prev_e[v]].dst
             var d = Cost(0) - dual_dist[s][0]
             flow = flow + c

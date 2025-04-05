@@ -20,7 +20,8 @@ fn heappop[S: HasLtCollectionElement](mut heap: List[S]) raises -> S:
     if len(heap) == 1:
         return heap.pop()
     var res = heap[0]
-    heap[0] = heap.pop()
+    heap.swap_elements(0, len(heap) - 1)
+    _ = heap.pop()
     _heapify(heap, 0)
     return res
 
