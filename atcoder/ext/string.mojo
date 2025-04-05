@@ -1,11 +1,5 @@
 from atcoder.method_traits import HasEqCollectionElement
-
-
-fn string_to_list(s: String) -> List[Int]:
-    var res = List[Int](0) * len(s)
-    for i in range(len(s)):
-        res[i] = ord(s[i])
-    return res
+from atcoder.py.string import string_to_list
 
 
 fn levenshtein_distance[

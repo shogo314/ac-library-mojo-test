@@ -1,5 +1,5 @@
 from atcoder.method_traits import HasEqCollectionElement
-from atcoder.ext.string import string_to_list
+from atcoder.py.string import string_to_list
 
 
 fn z_algorithm[S: HasEqCollectionElement](s: List[S]) -> List[Int]:

@@ -2,7 +2,7 @@ from testing import assert_true
 from collections import Deque
 
 from atcoder.internal_csr import CSR
-from atcoder.ext.priority_queue import PriorityQueue
+from atcoder.py.heapq import heappop, heappush
 
 alias Cap = Int
 alias Cost = Int
@@ -105,7 +105,7 @@ struct MCFGraph:
         var vis = List[Bool](False) * self._n
 
         var que_min = List[Int]()
-        var que = PriorityQueue[_Q]()
+        var que = List[_Q]()
 
         var flow = Cap()
         var cost = Cost(0)
@@ -121,12 +121,12 @@ struct MCFGraph:
             dual_dist[s][1] = Cost(0)
             que_min.append(s)
 
-            while que_min or que:
+            while que_min or len(que):
                 var v: Int
                 if que_min:
                     v = que_min.pop()
                 else:
-                    v = que.pop().dst
+                    v = heappop(que).dst
                 if vis[v]:
                     continue
                 vis[v] = True
@@ -146,7 +146,7 @@ struct MCFGraph:
                         if dist_dst == dist_v:
                             que_min.append(e.dst)
                         else:
-                            que.push(_Q(dist_dst, e.dst))
+                            heappush(que, _Q(dist_dst, e.dst))
             if not vis[t]:
                 break
             for v in range(self._n):
