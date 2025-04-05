@@ -1,7 +1,7 @@
 # verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/ALDS1_9_C
 
 from atcoder.io import IO
-from atcoder.ext.heapq import heappush, heappop
+from atcoder.py.heapq import heappush, heappop
 
 
 fn main() raises:

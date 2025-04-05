@@ -2,7 +2,7 @@ from testing import assert_true
 from collections import Deque
 
 from atcoder.internal_csr import CSR
-from atcoder.ext.heapq import Heap
+from atcoder.ext.priority_queue import PriorityQueue
 
 alias Cap = Int
 alias Cost = Int

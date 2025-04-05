@@ -1,4 +1,4 @@
-from atcoder.ext.bisect import bisect_left
+from atcoder.py.bisect import bisect_left
 
 
 fn longest_increasing_subsequence(a: List[Int]) -> Int:
