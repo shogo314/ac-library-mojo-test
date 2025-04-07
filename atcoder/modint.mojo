@@ -3,7 +3,7 @@ from testing import assert_true
 from atcoder.internal_math import inv_gcd
 
 
-struct static_modint[M: Int](CollectionElement, Writable):
+struct StaticModint[M: Int](WritableCollectionElement):
     var val: Int
 
     fn __init__(out self):
@@ -132,6 +132,6 @@ struct static_modint[M: Int](CollectionElement, Writable):
         return self.val
 
 
-alias modint998244353 = static_modint[998244353]
-alias modint1000000007 = static_modint[1000000007]
-alias modint1000000009 = static_modint[1000000009]
+alias modint998244353 = StaticModint[998244353]
+alias modint1000000007 = StaticModint[1000000007]
+alias modint1000000009 = StaticModint[1000000009]
