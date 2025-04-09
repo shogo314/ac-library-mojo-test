@@ -64,7 +64,7 @@ struct LazySegtree[S: CollectionElement, F: CollectionElement]:
             self.update(i)
 
     fn set(mut self, p: Int, x: S) raises:
-        assert_true(0 <= p and p < self.n)
+        assert_true(0 <= p < self.n)
         var q = p + self.size
         for i in reversed(range(1, self.log + 1)):
             self.push(q >> i)
@@ -73,14 +73,14 @@ struct LazySegtree[S: CollectionElement, F: CollectionElement]:
             self.update(q >> i)
 
     fn get(mut self, p: Int) raises -> S:
-        assert_true(0 <= p and p < self.n)
+        assert_true(0 <= p < self.n)
         var q = p + self.size
         for i in reversed(range(1, self.log + 1)):
             self.push(q >> i)
         return self.d[q]
 
     fn prod(mut self, l: Int, r: Int) raises -> S:
-        assert_true(0 <= l and l <= r and r <= self.n)
+        assert_true(0 <= l <= r <= self.n)
         if l == r:
             return self.e
         var a = l + self.size
@@ -107,7 +107,7 @@ struct LazySegtree[S: CollectionElement, F: CollectionElement]:
         return self.d[1]
 
     fn apply(mut self, p: Int, f: F) raises:
-        assert_true(0 <= p and p < self.n)
+        assert_true(0 <= p < self.n)
         var q = p + self.size
         for i in reversed(range(1, self.log + 1)):
             self.push(q >> i)
@@ -116,7 +116,7 @@ struct LazySegtree[S: CollectionElement, F: CollectionElement]:
             self.update(q >> i)
 
     fn apply(mut self, l: Int, r: Int, f: F) raises:
-        assert_true(0 <= l and l <= r and r <= self.n)
+        assert_true(0 <= l <= r <= self.n)
         if l == r:
             return
         var a = l + self.size

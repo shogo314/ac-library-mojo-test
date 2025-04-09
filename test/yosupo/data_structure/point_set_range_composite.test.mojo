@@ -3,44 +3,25 @@
 from atcoder.io import IO
 from atcoder.segtree import Segtree
 from atcoder.modint import modint998244353
+from atcoder.ext.affine import Affine
 
 alias mint = modint998244353
 
 
-struct Affine(CollectionElement):
-    var a: mint
-    var b: mint
-
-    fn __init__(out self, a: mint, b: mint):
-        self.a = a
-        self.b = b
-
-    fn __copyinit__(out self, o: Self):
-        self.a = o.a
-        self.b = o.b
-
-    fn __moveinit__(out self, owned o: Self):
-        self.a = o.a
-        self.b = o.b
-
-    fn assign(self, x: mint) -> mint:
-        return self.a * x + self.b
-
-
-fn composite(x: Affine, y: Affine) -> Affine:
-    return Affine(x.a * y.a, x.b * y.a + y.b)
+fn composite(x: Affine[mint], y: Affine[mint]) -> Affine[mint]:
+    return y.assign(x)
 
 
 fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var Q = io.nextInt()
-    var init = List[Affine]()
+    var init = List[Affine[mint]]()
     for _ in range(N):
         var a = io.nextInt()
         var b = io.nextInt()
         init.append(Affine(mint(a), mint(b)))
-    var seg = Segtree[Affine](init, composite, Affine(mint(1), mint(0)))
+    var seg = Segtree[Affine[mint]](init, composite, Affine(mint(1), mint(0)))
     for _ in range(Q):
         var q = io.nextInt()
         if q == 0:

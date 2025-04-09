@@ -7,29 +7,12 @@ from atcoder.modint import modint998244353
 alias mint = modint998244353
 
 
+@value
 struct Matrix_2x2(CollectionElement):
     var a: mint
     var b: mint
     var c: mint
     var d: mint
-
-    fn __init__(out self, a: mint, b: mint, c: mint, d: mint):
-        self.a = a
-        self.b = b
-        self.c = c
-        self.d = d
-
-    fn __copyinit__(out self, o: Self):
-        self.a = o.a
-        self.b = o.b
-        self.c = o.c
-        self.d = o.d
-
-    fn __moveinit__(out self, owned o: Self):
-        self.a = o.a
-        self.b = o.b
-        self.c = o.c
-        self.d = o.d
 
     fn __eq__(self, o: Self) -> Bool:
         return (

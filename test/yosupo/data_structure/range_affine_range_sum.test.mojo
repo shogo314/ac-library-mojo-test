@@ -7,41 +7,19 @@ from atcoder.modint import modint998244353
 alias mint = modint998244353
 
 
-struct ValueWithSize(CollectionElement):
+@value
+struct ValueWithSize:
     var value: mint
     var size: Int
-
-    fn __init__(out self, value: mint, size: Int):
-        self.value = value
-        self.size = size
-
-    fn __copyinit__(out self, o: Self):
-        self.value = o.value
-        self.size = o.size
-
-    fn __moveinit__(out self, owned o: Self):
-        self.value = o.value
-        self.size = o.size
 
     fn write_to[W: Writer](self, mut writer: W):
         writer.write("{", self.value, ",", self.size, "}")
 
 
-struct Affine(CollectionElement):
+@value
+struct Affine:
     var a: mint
     var b: mint
-
-    fn __init__(out self, a: mint, b: mint):
-        self.a = a
-        self.b = b
-
-    fn __copyinit__(out self, o: Self):
-        self.a = o.a
-        self.b = o.b
-
-    fn __moveinit__(out self, owned o: Self):
-        self.a = o.a
-        self.b = o.b
 
     fn write_to[W: Writer](self, mut writer: W):
         writer.write("Affine(", self.a, ",", self.b, ")")

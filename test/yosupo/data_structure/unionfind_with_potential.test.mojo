@@ -4,12 +4,14 @@ from atcoder.io import IO
 from atcoder.ext.potentialized_unionfind import UnionFindPlus
 from atcoder.modint import modint998244353
 
+alias mint = modint998244353
+
 
 fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var Q = io.nextInt()
-    var uf = UnionFindPlus[modint998244353](N)
+    var uf = UnionFindPlus[mint](N)
     for _ in range(Q):
         var t = io.nextInt()
         var u = io.nextInt()
@@ -23,7 +25,7 @@ fn main() raises:
                     print(0)
             else:
                 print(1)
-                _ = uf.merge(v, u, modint998244353(x))
+                _ = uf.merge(v, u, mint(x))
         else:
             if uf.same(u, v):
                 print(uf.diff(v, u).val)

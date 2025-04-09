@@ -5,10 +5,12 @@ from collections import Optional
 from atcoder.io import IO
 from atcoder.lazysegtree import LazySegtree
 from atcoder.modint import modint998244353
+from atcoder.ext.affine import Affine
 
 alias mint = modint998244353
 
 
+@value
 struct WithSize[T: CollectionElement](CollectionElement):
     var value: T
     var size: Int
@@ -17,85 +19,52 @@ struct WithSize[T: CollectionElement](CollectionElement):
         self.value = value
         self.size = 1
 
-    fn __init__(out self, value: T, size: Int):
-        self.value = value
-        self.size = size
+alias S = WithSize[Affine[mint]]
+alias F = Optional[Affine[mint]]
 
-    fn __copyinit__(out self, o: Self):
-        self.value = o.value
-        self.size = o.size
-
-    fn __moveinit__(out self, owned o: Self):
-        self.value = o.value
-        self.size = o.size
-
-
-struct Affine(CollectionElement):
-    var a: mint
-    var b: mint
-
-    fn __init__(out self, a: mint, b: mint):
-        self.a = a
-        self.b = b
-
-    fn __copyinit__(out self, o: Self):
-        self.a = o.a
-        self.b = o.b
-
-    fn __moveinit__(out self, owned o: Self):
-        self.a = o.a
-        self.b = o.b
-
-    fn assign(self, o: Self) -> Self:
-        return Self(self.a * o.a, self.a * o.b + self.b)
-
-    fn assign(self, x: mint) -> mint:
-        return self.a * x + self.b
-
-
-fn mapping(f: Optional[Affine], x: WithSize[Affine]) -> WithSize[Affine]:
+fn mapping(f: F, x: S) -> S:
     if f:
         try:
             var fv = f.value()
             var pw = fv.a.pow(x.size)
-            return WithSize[Affine](
+            return S(
                 Affine(pw, (pw - 1) / (fv.a - 1) * fv.b), x.size
             )
         except:
-            return WithSize[Affine](Affine(mint(1), mint(0)), 0)
+            return S(Affine(mint(1), mint(0)), 0)
     else:
         return x
 
 
-fn composite(x: Optional[Affine], y: Optional[Affine]) -> Optional[Affine]:
+fn composite(x: F, y: F) -> F:
     if x:
         return x
     else:
         return y
 
 
-fn id() -> Optional[Affine]:
-    return Optional[Affine](None)
+fn id() -> F:
+    return F()
 
 
-fn op(x: WithSize[Affine], y: WithSize[Affine]) -> WithSize[Affine]:
-    return WithSize[Affine](y.value.assign(x.value), x.size + y.size)
+fn op(x: S, y: S) -> S:
+    return S(y.value.assign(x.value), x.size + y.size)
 
 
-fn e() -> WithSize[Affine]:
-    return WithSize[Affine](Affine(mint(1), mint(0)), 0)
+fn e() -> S:
+    return S(Affine(mint(1), mint(0)), 0)
 
 
 fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var Q = io.nextInt()
-    var init = List[WithSize[Affine]]()
+    var init = List[S]()
     for _ in range(N):
         var a = io.nextInt()
         var b = io.nextInt()
-        init.append(WithSize[Affine](Affine(mint(a), mint(b))))
-    var seg = LazySegtree[WithSize[Affine], Optional[Affine]](
+        init.append(S(Affine(mint(a), mint(b))))
+    var seg = LazySegtree[S, F](
         init, op, e(), mapping, composite, id()
     )
     for _ in range(Q):
@@ -105,7 +74,7 @@ fn main() raises:
             var r = io.nextInt()
             var c = io.nextInt()
             var d = io.nextInt()
-            seg.apply(l, r, Optional[Affine](Affine(mint(c), mint(d))))
+            seg.apply(l, r, F(Affine(mint(c), mint(d))))
         else:
             var l = io.nextInt()
             var r = io.nextInt()
