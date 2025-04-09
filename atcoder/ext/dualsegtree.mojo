@@ -1,7 +1,9 @@
 from testing import assert_true
+from collections import Optional
 
 from atcoder.internal_bit import bit_ceil, countr_zero
 from atcoder.method_traits import HasAdd
+from atcoder.py.operator import add
 
 
 struct DualSegtree[S: CollectionElement, F: CollectionElement]:
@@ -49,7 +51,6 @@ struct DualSegtree[S: CollectionElement, F: CollectionElement]:
         self.log = countr_zero(self.size)
         self.d = v
         self.lz = List[F](id) * (2 * self.size)
-
 
     fn set(mut self, p: Int, x: S) raises:
         assert_true(0 <= p < self.n)
@@ -112,7 +113,22 @@ trait RAddQElement(CollectionElement, Defaultable, HasAdd):
 
 
 fn RAddQ[S: RAddQElement](n: Int) -> DualSegtree[S, S]:
-    fn add(x: S, y: S) -> S:
-        return x + y
+    return DualSegtree[S](n, S(), add[S], add[S], S())
 
-    return DualSegtree[S](n, S(), add, add, S())
+
+fn RUpdateQ[S: CollectionElement](n: Int, e: S) -> DualSegtree[S, Optional[S]]:
+    fn mapping(f: Optional[S], s: S) -> S:
+        if f:
+            return f.value()
+        else:
+            return s
+
+    fn composition(f: Optional[S], g: Optional[S]) -> Optional[S]:
+        if f:
+            return f
+        else:
+            return g
+
+    return DualSegtree[S, Optional[S]](
+        n, e, mapping, composition, Optional[S]()
+    )

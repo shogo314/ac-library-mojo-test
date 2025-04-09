@@ -2,29 +2,14 @@
 
 from atcoder.io import IO
 from atcoder.ext.dualsegtree import DualSegtree
-
-
-fn e() -> Int:
-    return 0
-
-
-fn mapping(f: Int, s: Int) -> Int:
-    return f + s
-
-
-fn composition(f: Int, g: Int) -> Int:
-    return f + g
-
-
-fn id() -> Int:
-    return 0
+from atcoder.py.operator import add
 
 
 fn main() raises:
     var io = IO()
     var n = io.nextInt()
     var q = io.nextInt()
-    var seg = DualSegtree[Int, Int](n, e(), mapping, composition, id())
+    var seg = DualSegtree[Int, Int](n, 0, add[Int], add[Int], 0)
     for _ in range(q):
         var op = io.nextInt()
         if op == 0:

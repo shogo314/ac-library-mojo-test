@@ -1,6 +1,8 @@
 from testing import assert_true
 
 from atcoder.internal_bit import bit_ceil, countr_zero
+from atcoder.method_traits import HasLtCollectionElement
+from atcoder.py.operator import add
 
 
 struct LazySegtree[S: CollectionElement, F: CollectionElement]:
@@ -156,3 +158,29 @@ struct LazySegtree[S: CollectionElement, F: CollectionElement]:
         self.all_apply(2 * k, lzk)
         self.all_apply(2 * k + 1, lzk)
         self.lz[k] = self.id
+
+
+fn RUpdateMinQ[
+    S: HasLtCollectionElement
+](n: Int, e: S) -> LazySegtree[S, Optional[S]]:
+    fn op(x: S, y: S) -> S:
+        if y < x:
+            return y
+        else:
+            return x
+
+    fn mapping(f: Optional[S], s: S) -> S:
+        if f:
+            return f.value()
+        else:
+            return s
+
+    fn composition(f: Optional[S], g: Optional[S]) -> Optional[S]:
+        if f:
+            return f
+        else:
+            return g
+
+    return LazySegtree[S, Optional[S]](
+        n, op, e, mapping, composition, Optional[S]()
+    )

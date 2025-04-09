@@ -1,4 +1,4 @@
-# verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_2_F
+# verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_2_G
 
 from collections import Optional
 
@@ -29,11 +29,13 @@ fn main() raises:
     var io = IO()
     var n = io.nextInt()
     var q = io.nextInt()
-    var init = List[WithSize[Int]]()
-    for _ in range(n):
-        init.append(WithSize(0))
     var seg = LazySegtree[WithSize[Int], Int](
-        init, op, WithSize(0, 0), mapping, add[Int], 0
+        List[WithSize[Int]](WithSize(0)) * n,
+        op,
+        WithSize(0, 0),
+        mapping,
+        add[Int],
+        0,
     )
     for _ in range(q):
         var op = io.nextInt()
