@@ -1,3 +1,5 @@
+# verification-helper: PROBLEM https://onlinejudge.u-aizu.ac.jp/problems/DSL_2_D
+
 from atcoder.io import IO
 from atcoder.ext.dualsegtree import DualSegtree
 
