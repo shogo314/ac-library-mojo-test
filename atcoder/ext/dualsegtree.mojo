@@ -1,6 +1,7 @@
 from testing import assert_true
 
 from atcoder.internal_bit import bit_ceil, countr_zero
+from atcoder.method_traits import HasAdd
 
 
 struct DualSegtree[S: CollectionElement, F: CollectionElement]:
@@ -29,13 +30,12 @@ struct DualSegtree[S: CollectionElement, F: CollectionElement]:
         self.n = n
         self.size = Int(bit_ceil(n))
         self.log = countr_zero(self.size)
-        self.d = List[S](e) * self.size
+        self.d = List[S](e) * n
         self.lz = List[F](id) * (2 * self.size)
 
     fn __init__(
         out self,
         v: List[S],
-        e: S,
         mapping: fn (F, S) -> S,
         composition: fn (F, F) -> F,
         id: F,
@@ -47,11 +47,9 @@ struct DualSegtree[S: CollectionElement, F: CollectionElement]:
         self.n = len(v)
         self.size = Int(bit_ceil(self.n))
         self.log = countr_zero(self.size)
-        self.d = List[S](e) * self.size
+        self.d = v
         self.lz = List[F](id) * (2 * self.size)
 
-        for i in range(self.n):
-            self.d[i] = v[i]
 
     fn set(mut self, p: Int, x: S) raises:
         assert_true(0 <= p < self.n)
@@ -99,10 +97,22 @@ struct DualSegtree[S: CollectionElement, F: CollectionElement]:
         if k < self.size:
             self.lz[k] = self.composition(f, self.lz[k])
         else:
-            self.d[k - self.size] = self.mapping(f, self.d[k - self.size])
+            if k - self.size < self.n:
+                self.d[k - self.size] = self.mapping(f, self.d[k - self.size])
 
     fn push(mut self, k: Int):
         var lzk = self.lz[k]
         self.all_apply(2 * k, lzk)
         self.all_apply(2 * k + 1, lzk)
         self.lz[k] = self.id
+
+
+trait RAddQElement(CollectionElement, Defaultable, HasAdd):
+    pass
+
+
+fn RAddQ[S: RAddQElement](n: Int) -> DualSegtree[S, S]:
+    fn add(x: S, y: S) -> S:
+        return x + y
+
+    return DualSegtree[S](n, S(), add, add, S())
