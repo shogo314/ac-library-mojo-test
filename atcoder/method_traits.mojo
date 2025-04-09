@@ -44,3 +44,6 @@ trait HasLtCollectionElement(CollectionElement, HasLt):
 
 trait HasEqCollectionElement(CollectionElement, HasEq):
     pass
+
+trait AddGroup(CollectionElement, Defaultable, HasAdd, HasNeg):
+    pass

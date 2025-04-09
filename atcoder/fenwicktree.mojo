@@ -1,13 +1,9 @@
 from testing import assert_true
 
-from atcoder.method_traits import HasAdd, HasSub
+from atcoder.method_traits import AddGroup
 
 
-trait Group(CollectionElement, Defaultable, HasAdd, HasSub):
-    pass
-
-
-struct FenwickTree[T: Group]:
+struct FenwickTree[T: AddGroup]:
     var _n: Int
     var data: List[T]
 
@@ -25,8 +21,7 @@ struct FenwickTree[T: Group]:
 
     fn sum(self, left: Int, right: Int) raises -> T:
         assert_true(0 <= left <= right <= self._n)
-
-        return self._sum(right) - self._sum(left)
+        return self._sum(right) + -self._sum(left)
 
     fn _sum(self, r: Int) -> T:
         var t = r
@@ -34,5 +29,4 @@ struct FenwickTree[T: Group]:
         while t > 0:
             s = s + self.data[t - 1]
             t -= t & -t
-
         return s

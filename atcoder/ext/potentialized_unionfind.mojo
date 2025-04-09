@@ -2,11 +2,11 @@ from testing import assert_true
 
 from atcoder.method_traits import (
     HasInitIntLiteral,
-    HasAdd,
-    HasNeg,
     HasMul,
     HasTruediv,
+    AddGroup,
 )
+from atcoder.py.operator import add, neg
 
 
 struct PotentializedUnionFind[S: CollectionElement]:
@@ -72,18 +72,8 @@ struct PotentializedUnionFind[S: CollectionElement]:
         return self.diff_weight[a]
 
 
-trait UnionFindPlusElement(CollectionElement, HasAdd, HasNeg, Defaultable):
-    pass
-
-
-fn UnionFindPlus[S: UnionFindPlusElement](n: Int) -> PotentializedUnionFind[S]:
-    fn add(x: S, y: S) -> S:
-        return x + y
-
-    fn neg(x: S) -> S:
-        return -x
-
-    return PotentializedUnionFind[S](n, add, S(), neg)
+fn UnionFindPlus[S: AddGroup](n: Int) -> PotentializedUnionFind[S]:
+    return PotentializedUnionFind[S](n, add[S], S(), neg[S])
 
 
 trait UnionFindMulElement(
