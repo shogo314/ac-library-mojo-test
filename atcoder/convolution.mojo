@@ -1,58 +1,22 @@
 from testing import assert_true
 
 from atcoder.internal_bit import countr_zero, bit_ceil
-from atcoder.method_traits import (
-    HasAdd,
-    HasMul,
-    HasSub,
-    HasInitInt,
-    HasInitUInt64,
-)
 from atcoder.internal_math import _primitive_root
 from atcoder.modint import StaticModint
 
 
-trait ModintTrait(
-    CollectionElement,
-    Defaultable,
-    HasInitInt,
-    HasInitUInt64,
-    HasAdd,
-    HasMul,
-    HasSub,
-):
-    @staticmethod
-    fn mod() -> Int:
-        pass
-
-    @staticmethod
-    fn modu64() -> UInt64:
-        pass
-
-    fn val(self) -> Int:
-        pass
-
-    fn valu64(self) -> UInt64:
-        pass
-
-    fn pow(self, x: Int) raises -> Self:
-        pass
-
-    fn inv(self) raises -> Self:
-        pass
-
-
-struct _FFTInfo[mint: ModintTrait]:
-    var root: List[mint]
-    var iroot: List[mint]
-    var rate2: List[mint]
-    var irate2: List[mint]
-    var rate3: List[mint]
-    var irate3: List[mint]
+struct _FFTInfo[M: Int]:
+    var root: List[StaticModint[M]]
+    var iroot: List[StaticModint[M]]
+    var rate2: List[StaticModint[M]]
+    var irate2: List[StaticModint[M]]
+    var rate3: List[StaticModint[M]]
+    var irate3: List[StaticModint[M]]
 
     fn __init__(out self) raises:
-        var g = _primitive_root(mint.mod())
-        var rank2 = countr_zero(mint.mod() - 1)
+        alias mint = StaticModint[M]
+        alias g = _primitive_root(M)
+        alias rank2 = countr_zero(M - 1)
 
         self.root = List[mint](mint()) * (rank2 + 1)
         self.iroot = List[mint](mint()) * (rank2 + 1)
@@ -61,7 +25,7 @@ struct _FFTInfo[mint: ModintTrait]:
         self.rate3 = List[mint](mint()) * max(0, rank2 - 2)
         self.irate3 = List[mint](mint()) * max(0, rank2 - 2)
 
-        self.root[rank2] = mint(g).pow((mint.mod() - 1) >> rank2)
+        self.root[rank2] = mint(g).pow((M - 1) >> rank2)
         self.iroot[rank2] = self.root[rank2].inv()
         for i in reversed(range(rank2)):
             self.root[i] = self.root[i + 1] * self.root[i + 1]
@@ -84,10 +48,11 @@ struct _FFTInfo[mint: ModintTrait]:
             iprod = iprod * self.root[i + 3]
 
 
-fn _butterfly[mint: ModintTrait](mut a: List[mint]) raises:
+fn _butterfly[M: Int](mut a: List[StaticModint[M]]) raises:
+    alias mint = StaticModint[M]
     var n = len(a)
     var h = countr_zero(n)
-    var info = _FFTInfo[mint]()
+    var info = _FFTInfo[M]()
     var ln = 0
     while ln < h:
         if h - ln == 1:
@@ -112,7 +77,7 @@ fn _butterfly[mint: ModintTrait](mut a: List[mint]) raises:
                 var rot3 = rot2 * rot
                 var offset = s << (h - ln)
                 for i in range(p):
-                    var mod2 = mint.modu64() * mint.modu64()
+                    alias mod2 = UInt64(M) * UInt64(M)
                     var a0 = a[i + offset].valu64()
                     var a1 = a[i + offset + p].valu64() * rot.valu64()
                     var a2 = a[i + offset + 2 * p].valu64() * rot2.valu64()
@@ -132,10 +97,11 @@ fn _butterfly[mint: ModintTrait](mut a: List[mint]) raises:
             ln += 2
 
 
-fn _butterfly_inv[mint: ModintTrait](mut a: List[mint]) raises:
+fn _butterfly_inv[M: Int](mut a: List[StaticModint[M]]) raises:
+    alias mint = StaticModint[M]
     var n = len(a)
     var h = countr_zero(n)
-    var info = _FFTInfo[mint]()
+    var info = _FFTInfo[M]()
     var ln = h
     while ln:
         if ln == 1:
@@ -148,7 +114,7 @@ fn _butterfly_inv[mint: ModintTrait](mut a: List[mint]) raises:
                     var r = a[i + offset + p]
                     a[i + offset] = l + r
                     a[i + offset + p] = mint(
-                        (mint.modu64() + l.valu64() - r.valu64())
+                        (UInt64(M) + l.valu64() - r.valu64())
                         * irot.valu64()
                     )
                 if s + 1 != (1 << (ln - 1)):
@@ -168,22 +134,22 @@ fn _butterfly_inv[mint: ModintTrait](mut a: List[mint]) raises:
                     var a2 = a[i + offset + 2 * p].valu64()
                     var a3 = a[i + offset + 3 * p].valu64()
                     var a2na3iimag = mint(
-                        (mint.mod() + a2 - a3) * iimag.valu64()
+                        (UInt64(M) + a2 - a3) * iimag.valu64()
                     ).valu64()
 
                     a[i + offset] = mint(a0 + a1 + a2 + a3)
                     a[i + offset + 1 * p] = mint(
-                        (a0 + (mint.modu64() - a1) + a2na3iimag) * irot.valu64()
+                        (a0 + (UInt64(M) - a1) + a2na3iimag) * irot.valu64()
                     )
                     a[i + offset + 2 * p] = mint(
-                        (a0 + a1 + (mint.modu64() - a2) + (mint.modu64() - a3))
+                        (a0 + a1 + (UInt64(M) - a2) + (UInt64(M) - a3))
                         * irot2.valu64()
                     )
                     a[i + offset + 3 * p] = mint(
                         (
                             a0
-                            + (mint.modu64() - a1)
-                            + (mint.modu64() - a2na3iimag)
+                            + (UInt64(M) - a1)
+                            + (UInt64(M) - a2na3iimag)
                         )
                         * irot3.val()
                     )
@@ -193,8 +159,9 @@ fn _butterfly_inv[mint: ModintTrait](mut a: List[mint]) raises:
 
 
 fn _convolution_fft[
-    mint: ModintTrait
-](a_: List[mint], b_: List[mint]) raises -> List[mint]:
+    M: Int
+](a_: List[StaticModint[M]], b_: List[StaticModint[M]]) raises -> List[StaticModint[M]]:
+    alias mint = StaticModint[M]
     var a = a_
     var b = b_
     var n = len(a)
@@ -215,14 +182,14 @@ fn _convolution_fft[
 
 
 fn convolution[
-    mint: ModintTrait
-](a: List[mint], b: List[mint]) raises -> List[mint]:
+    M: Int
+](a: List[StaticModint[M]], b: List[StaticModint[M]]) raises -> List[StaticModint[M]]:
     var n = len(a)
     var m = len(b)
     if n == 0 or m == 0:
-        return List[mint]()
+        return List[StaticModint[M]]()
     var z = Int(bit_ceil(n + m - 1))
-    assert_true((mint.mod() - 1) % z == 0)
+    assert_true((StaticModint[M].mod() - 1) % z == 0)
     return _convolution_fft(a, b)
 
 
