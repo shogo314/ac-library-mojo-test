@@ -1,5 +1,5 @@
 from atcoder.method_traits import (
-    HasInitIntLiteral,
+    HasInitInt,
     HasAdd,
     HasNeg,
     HasMul,

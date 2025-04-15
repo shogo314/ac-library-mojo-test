@@ -1,3 +1,16 @@
+fn pow_mod(x: Int, n: Int, m: Int) -> Int:
+    if m == 1:
+        return 0
+    var r = 1
+    var y = x % m
+    var n_ = n
+    while n_:
+        if n_ & 1:
+            r = r * y % m
+        y = y * y % m
+        n_ = n_ >> 1
+    return r
+
 # struct barrett:
 #     var _m: UInt32
 #     var im: UInt64
@@ -29,7 +42,7 @@
 #     return True
 
 
-fn inv_gcd(a: Int, b: Int) -> (Int, Int):
+fn _inv_gcd(a: Int, b: Int) -> (Int, Int):
     var s = b
     var t = a % b
     if t == 0:
@@ -47,42 +60,43 @@ fn inv_gcd(a: Int, b: Int) -> (Int, Int):
     return (s, m0)
 
 
-# fn _primitive_root(m: Int) -> Int:
-#     if m == 2:
-#         return 1
-#     if m == 167772161:
-#         return 3
-#     if m == 469762049:
-#         return 3
-#     if m == 754974721:
-#         return 11
-#     if m == 998244353:
-#         return 3
+fn _primitive_root(m: Int) -> Int:
+    if m == 2:
+        return 1
+    if m == 167772161:
+        return 3
+    if m == 469762049:
+        return 3
+    if m == 754974721:
+        return 11
+    if m == 998244353:
+        return 3
 
-#     divs = [2] + [0] * 19
-#     cnt = 1
-#     x = (m - 1) // 2
-#     while x % 2 == 0:
-#         x //= 2
+    var divs = List[Int](0) * 20
+    divs[0] = 2
+    var cnt = 1
+    var x = (m - 1) // 2
+    while x % 2 == 0:
+        x //= 2
 
-#     i = 3
-#     while i * i <= x:
-#         if x % i == 0:
-#             divs[cnt] = i
-#             cnt += 1
-#             while x % i == 0:
-#                 x //= i
-#         i += 2
+    var i = 3
+    while i * i <= x:
+        if x % i == 0:
+            divs[cnt] = i
+            cnt += 1
+            while x % i == 0:
+                x //= i
+        i += 2
 
-#     if x > 1:
-#         divs[cnt] = x
-#         cnt += 1
+    if x > 1:
+        divs[cnt] = x
+        cnt += 1
 
-#     g = 2
-#     while True:
-#         for i in range(cnt):
-#             if pow(g, (m - 1) // divs[i], m) == 1:
-#                 break
-#         else:
-#             return g
-#         g += 1
+    var g = 2
+    while True:
+        for i in range(cnt):
+            if pow_mod(g, (m - 1) // divs[i], m) == 1:
+                break
+        else:
+            return g
+        g += 1

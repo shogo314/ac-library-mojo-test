@@ -1,42 +1,51 @@
 from testing import assert_true
 
-from atcoder.internal_math import inv_gcd
+from atcoder.internal_math import _inv_gcd
 
 
 struct StaticModint[M: Int](WritableCollectionElement):
-    var val: Int
+    var _val: Int
 
     fn __init__(out self):
-        self.val = 0
+        self._val = 0
 
     fn __init__(out self, v: Int):
-        self.val = v % M
+        self._val = v % M
+
+    fn __init__(out self, v: UInt64):
+        self._val = Int(v % UInt64(M))
 
     fn __copyinit__(out self, o: Self):
-        self.val = o.val
+        self._val = o._val
 
     fn __moveinit__(out self, owned o: Self):
-        self.val = o.val
+        self._val = o._val
+
+    fn val(self) -> Int:
+        return self._val
+
+    fn valu64(self) -> UInt64:
+        return self._val
 
     fn __iadd__(mut self, rhs: Self):
-        self.val += rhs.val
-        if self.val >= M:
-            self.val -= M
+        self._val += rhs._val
+        if self._val >= M:
+            self._val -= M
 
     fn __iadd__(mut self, rhs: Int):
         self += Self(rhs)
 
     fn __isub__(mut self, rhs: Self):
-        self.val -= rhs.val
-        if self.val < 0:
-            self.val += M
+        self._val -= rhs._val
+        if self._val < 0:
+            self._val += M
 
     fn __isub__(mut self, rhs: Int):
         self -= Self(rhs)
 
     fn __imul__(mut self, rhs: Self):
-        self.val *= rhs.val
-        self.val %= M
+        self._val *= rhs._val
+        self._val %= M
 
     fn __imul__(mut self, rhs: Int):
         self *= Self(rhs)
@@ -69,7 +78,7 @@ struct StaticModint[M: Int](WritableCollectionElement):
         return self.pow(n)
 
     fn inv(self) raises -> Self:
-        eg = inv_gcd(self.val, M)
+        eg = _inv_gcd(self._val, M)
         assert_true(eg[0] == 1)
         return Self(eg[1])
 
@@ -114,22 +123,30 @@ struct StaticModint[M: Int](WritableCollectionElement):
         return res
 
     fn __eq__(self, rhs: Self) -> Bool:
-        return self.val == rhs.val
+        return self._val == rhs._val
 
     fn __eq__(self, rhs: Int) -> Bool:
         return self == Self(rhs)
 
     fn __ne__(self, rhs: Self) -> Bool:
-        return self.val != rhs.val
+        return self._val != rhs._val
 
     fn __ne__(self, rhs: Int) -> Bool:
         return self != Self(rhs)
 
     fn write_to[W: Writer](self, mut writer: W):
-        writer.write(self.val)
+        writer.write(self._val)
 
     fn __int__(self) -> Int:
-        return self.val
+        return self._val
+
+    @staticmethod
+    fn mod() -> Int:
+        return M
+
+    @staticmethod
+    fn modu64() -> UInt64:
+        return UInt64(M)
 
 
 alias modint998244353 = StaticModint[998244353]

@@ -1,23 +1,6 @@
 from testing import assert_true
 
-import atcoder.internal_math
-
-
-fn pow_mod(x: Int, n: Int, m: Int) -> Int:
-    """
-    1 <= m < 2^32.
-    """
-    if m == 1:
-        return 0
-    var r = 1
-    var y = x % m
-    var n_ = n
-    while n_:
-        if n_ & 1:
-            r = r * y % m
-        y = y * y % m
-        n_ = n_ >> 1
-    return r
+from atcoder.internal_math import pow_mod
 
 
 # fn inv_mod(x: Int, m: Int) -> Int:

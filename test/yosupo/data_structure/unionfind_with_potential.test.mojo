@@ -28,6 +28,6 @@ fn main() raises:
                 _ = uf.merge(v, u, mint(x))
         else:
             if uf.same(u, v):
-                print(uf.diff(v, u).val)
+                print(uf.diff(v, u))
             else:
                 print(-1)

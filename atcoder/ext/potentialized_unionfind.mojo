@@ -1,7 +1,7 @@
 from testing import assert_true
 
 from atcoder.method_traits import (
-    HasInitIntLiteral,
+    HasInitInt,
     HasMul,
     HasTruediv,
     AddGroup,
@@ -77,7 +77,7 @@ fn UnionFindPlus[S: AddGroup](n: Int) -> PotentializedUnionFind[S]:
 
 
 trait UnionFindMulElement(
-    CollectionElement, HasMul, HasTruediv, HasInitIntLiteral
+    CollectionElement, HasMul, HasTruediv, HasInitInt
 ):
     pass
 

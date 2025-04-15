@@ -33,8 +33,13 @@ trait HasEq:
         pass
 
 
-trait HasInitIntLiteral:
-    fn __init__(out self, x: IntLiteral):
+trait HasInitInt:
+    fn __init__(out self, x: Int):
+        pass
+
+
+trait HasInitUInt64:
+    fn __init__(out self, x: UInt64):
         pass
 
 
@@ -44,6 +49,7 @@ trait HasLtCollectionElement(CollectionElement, HasLt):
 
 trait HasEqCollectionElement(CollectionElement, HasEq):
     pass
+
 
 trait AddGroup(CollectionElement, Defaultable, HasAdd, HasNeg):
     pass

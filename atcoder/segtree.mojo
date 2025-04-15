@@ -3,7 +3,7 @@ from testing import assert_true
 from atcoder.internal_bit import bit_ceil, countr_zero
 from atcoder.method_traits import (
     HasAdd,
-    HasInitIntLiteral,
+    HasInitInt,
     HasMul,
     HasLtCollectionElement,
 )
@@ -81,7 +81,7 @@ fn RSumQ[S: RSumQElement](n: Int) -> Segtree[S]:
     return Segtree[S](n, add[S], S())
 
 
-trait RMulQElement(CollectionElement, HasInitIntLiteral, HasMul):
+trait RMulQElement(CollectionElement, HasInitInt, HasMul):
     pass
 
 
