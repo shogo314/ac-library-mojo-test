@@ -114,8 +114,7 @@ fn _butterfly_inv[M: Int](mut a: List[StaticModint[M]]) raises:
                     var r = a[i + offset + p]
                     a[i + offset] = l + r
                     a[i + offset + p] = mint(
-                        (UInt64(M) + l.valu64() - r.valu64())
-                        * irot.valu64()
+                        (UInt64(M) + l.valu64() - r.valu64()) * irot.valu64()
                     )
                 if s + 1 != (1 << (ln - 1)):
                     irot = irot * info.irate2[countr_zero(~UInt32(s))]
@@ -146,11 +145,7 @@ fn _butterfly_inv[M: Int](mut a: List[StaticModint[M]]) raises:
                         * irot2.valu64()
                     )
                     a[i + offset + 3 * p] = mint(
-                        (
-                            a0
-                            + (UInt64(M) - a1)
-                            + (UInt64(M) - a2na3iimag)
-                        )
+                        (a0 + (UInt64(M) - a1) + (UInt64(M) - a2na3iimag))
                         * irot3.val()
                     )
                 if s + 1 != (1 << (ln - 2)):
@@ -160,7 +155,9 @@ fn _butterfly_inv[M: Int](mut a: List[StaticModint[M]]) raises:
 
 fn _convolution_fft[
     M: Int
-](a_: List[StaticModint[M]], b_: List[StaticModint[M]]) raises -> List[StaticModint[M]]:
+](a_: List[StaticModint[M]], b_: List[StaticModint[M]]) raises -> List[
+    StaticModint[M]
+]:
     alias mint = StaticModint[M]
     var a = a_
     var b = b_
@@ -183,7 +180,9 @@ fn _convolution_fft[
 
 fn convolution[
     M: Int
-](a: List[StaticModint[M]], b: List[StaticModint[M]]) raises -> List[StaticModint[M]]:
+](a: List[StaticModint[M]], b: List[StaticModint[M]]) raises -> List[
+    StaticModint[M]
+]:
     var n = len(a)
     var m = len(b)
     if n == 0 or m == 0:
@@ -193,45 +192,78 @@ fn convolution[
     return _convolution_fft(a, b)
 
 
-# fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
-#     var n = len(a)
-#     var m = len(b)
-#     if n == 0 or m == 0:
-#         return List[Int]()
+fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
+    var n = len(a)
+    var m = len(b)
+    if n == 0 or m == 0:
+        return List[Int]()
 
-#     var MOD1 = UInt64(754974721)
-#     var MOD2 = UInt64(167772161)
-#     var MOD3 = UInt64(469762049)
-#     var M2M3 = UInt64(78812994116517889)
-#     var M1M3 = UInt64(354658471880163329)
-#     var M1M2 = UInt64(126663740442542081)
-#     var M1M2M3 = UInt64(560135205046714369)
+    alias MOD1 = UInt64(754974721)
+    alias MOD2 = UInt64(167772161)
+    alias MOD3 = UInt64(469762049)
+    alias M2M3 = MOD2 * MOD3
+    alias M1M3 = MOD1 * MOD3
+    alias M1M2 = MOD1 * MOD2
+    alias M1M2M3 = MOD1 * MOD2 * MOD3
+    # alias M1M2M3 = UInt64(560135205046714369)
 
-#     var i1 = UInt64(190329765)
-#     var i2 = UInt64(58587104)
-#     var i3 = UInt64(187290749)
+    alias i1 = UInt64(190329765)
+    alias i2 = UInt64(58587104)
+    alias i3 = UInt64(187290749)
 
-#     var MAX_AB_BIT = 24
-#     assert_true(n + m - 1 <= (1 << MAX_AB_BIT))
+    alias MAX_AB_BIT = 24
+    assert_true(n + m - 1 <= (1 << MAX_AB_BIT))
 
-#     var c1: List[StaticModint[754974721]]
-#     var c2: List[StaticModint[167772161]]
-#     var c3: List[StaticModint[469762049]]
+    var c1: List[StaticModint[754974721]]
+    var c2: List[StaticModint[167772161]]
+    var c3: List[StaticModint[469762049]]
 
-#     if True:
-#         var am = List[StaticModint[754974721]]()
-#         for i in range(n):
-#             am.append(StaticModint[754974721](a[i]))
-#         var bm = List[StaticModint[754974721]]()
-#         for i in range(n):
-#             bm.append(StaticModint[754974721](b[i]))
-#         c1 = convolution(am, bm)
+    @parameter
+    if True:
+        alias mint = StaticModint[754974721]
+        var am = List[mint]()
+        for i in range(n):
+            am.append(mint(a[i]))
+        var bm = List[mint]()
+        for i in range(m):
+            bm.append(mint(b[i]))
+        c1 = convolution(am, bm)
+        # for i in range(len(c1)):
+        #     if i:
+        #         print(end=" ")
+        #     print(c1[i], end="")
+        # print()
 
-#     if True:
-#         var am = List[StaticModint[167772161]]()
-#         for i in range(n):
-#             am.append(StaticModint[167772161](a[i]))
-#         var bm = List[StaticModint[167772161]]()
-#         for i in range(n):
-#             bm.append(StaticModint[167772161](b[i]))
-#         c2 = convolution(am, bm)
+    @parameter
+    if True:
+        alias mint = StaticModint[167772161]
+        var am = List[mint]()
+        for i in range(n):
+            am.append(mint(a[i]))
+        var bm = List[mint]()
+        for i in range(m):
+            bm.append(mint(b[i]))
+        c2 = convolution(am, bm)
+
+    @parameter
+    if True:
+        alias mint = StaticModint[469762049]
+        var am = List[mint]()
+        for i in range(n):
+            am.append(mint(a[i]))
+        var bm = List[mint]()
+        for i in range(m):
+            bm.append(mint(b[i]))
+        c3 = convolution(am, bm)
+
+    var c = List[Int](0) * (n + m - 1)
+    for i in range(n + m - 1):
+        var x = UInt64(0)
+        x += (c1[i] * StaticModint[754974721](i1)).valu64() * M2M3
+        x += (c2[i] * StaticModint[167772161](i2)).valu64() * M1M3
+        x += (c3[i] * StaticModint[469762049](i3)).valu64() * M1M2
+        var diff = (c1[i] - StaticModint[754974721](x)).val()
+        alias offset = List[UInt64](0, 0, M1M2M3, 2 * M1M2M3, 3 * M1M2M3)
+        x -= offset[diff % 5]
+        c[i] = Int(x)
+    return c
