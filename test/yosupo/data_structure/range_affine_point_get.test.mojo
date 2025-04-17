@@ -20,10 +20,7 @@ fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var Q = io.nextInt()
-    var init = List[mint]()
-    for _ in range(N):
-        var a = io.nextInt()
-        init.append(mint(a))
+    var init = io.nextList[mint](N)
     var seg = DualSegtree[mint, Affine[mint]](
         init, mapping, composite, Affine(mint(1), mint(0))
     )

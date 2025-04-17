@@ -8,9 +8,7 @@ fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var Q = io.nextInt()
-    var S = List[Int]()
-    for _ in range(N):
-        S.append(io.nextInt())
+    var S = io.nextListInt(N)
     var heap = IntervalHeap[Int](S)
     for _ in range(Q):
         var op = io.nextInt()

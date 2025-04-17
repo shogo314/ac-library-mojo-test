@@ -2,21 +2,14 @@
 
 from atcoder.io import IO
 from atcoder.ext.potentialized_unionfind import PotentializedUnionFind
-
-
-fn add(x: Int, y: Int) -> Int:
-    return x + y
-
-
-fn neg(x: Int) -> Int:
-    return -x
+from atcoder.py.operator import add, neg
 
 
 fn main() raises:
     var io = IO()
     var n = io.nextInt()
     var q = io.nextInt()
-    var uf = PotentializedUnionFind[Int](n, add, 0, neg)
+    var uf = PotentializedUnionFind[Int](n, add[Int], 0, neg[Int])
     for _ in range(q):
         t = io.nextInt()
         if t == 0:

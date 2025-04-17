@@ -43,6 +43,11 @@ trait HasInitUInt64:
         pass
 
 
+trait HasInitStringRaising:
+    fn __init__(out self, x: String) raises:
+        pass
+
+
 trait HasLtCollectionElement(CollectionElement, HasLt):
     pass
 

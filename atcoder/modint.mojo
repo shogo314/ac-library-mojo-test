@@ -15,6 +15,9 @@ struct StaticModint[M: Int](WritableCollectionElement):
     fn __init__(out self, v: UInt64):
         self._val = Int(v % UInt64(M))
 
+    fn __init__(out self, v: String) raises:
+        self._val = Int(v) % M
+
     fn __copyinit__(out self, o: Self):
         self._val = o._val
 

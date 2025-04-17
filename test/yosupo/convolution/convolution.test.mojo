@@ -11,11 +11,7 @@ fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var M = io.nextInt()
-    var a = List[mint]()
-    for _ in range(N):
-        a.append(mint(io.nextInt()))
-    var b = List[mint]()
-    for _ in range(M):
-        b.append(mint(io.nextInt()))
+    var a = io.nextList[mint](N)
+    var b = io.nextList[mint](M)
     var ans = convolution(a, b)
     IO.print(ans)

@@ -9,7 +9,5 @@ from atcoder.ext.longest_increasing_subsequence import (
 fn main() raises:
     var io = IO()
     var n = io.nextInt()
-    var a = List[Int]()
-    for _ in range(n):
-        a.append(io.nextInt())
+    var a = io.nextListInt(n)
     print(longest_increasing_subsequence(a))

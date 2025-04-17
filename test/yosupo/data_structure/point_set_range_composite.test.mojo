@@ -16,7 +16,7 @@ fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var Q = io.nextInt()
-    var init = List[Affine[mint]]()
+    var init = List[Affine[mint]](capacity=N)
     for _ in range(N):
         var a = io.nextInt()
         var b = io.nextInt()

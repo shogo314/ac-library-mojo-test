@@ -49,7 +49,7 @@ fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var Q = io.nextInt()
-    var init = List[ValueWithSize]()
+    var init = List[ValueWithSize](capacity=N)
     for _ in range(N):
         var a = io.nextInt()
         init.append(ValueWithSize(mint(a), 1))

@@ -24,12 +24,6 @@ struct _Edge:
     var cap: Cap
     var cost: Cost
 
-    fn __init__(out self):
-        self.dst = -1
-        self.rev = -1
-        self.cap = Cap()
-        self.cost = Cost()
-
 
 struct MCFGraph:
     var _n: Int

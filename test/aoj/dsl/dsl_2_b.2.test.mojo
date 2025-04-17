@@ -2,17 +2,14 @@
 
 from atcoder.io import IO
 from atcoder.segtree import Segtree
-
-
-fn add(x: Int, y: Int) -> Int:
-    return x + y
+from atcoder.py.operator import add
 
 
 fn main() raises:
     var io = IO()
     var n = io.nextInt()
     var q = io.nextInt()
-    var seg = Segtree[Int](n, add, 0)
+    var seg = Segtree[Int](n, add[Int], 0)
     for _ in range(q):
         var com = io.nextInt()
         var x = io.nextInt()

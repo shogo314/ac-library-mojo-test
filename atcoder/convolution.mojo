@@ -205,7 +205,6 @@ fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
     alias M1M3 = MOD1 * MOD3
     alias M1M2 = MOD1 * MOD2
     alias M1M2M3 = MOD1 * MOD2 * MOD3
-    # alias M1M2M3 = UInt64(560135205046714369)
 
     alias i1 = UInt64(190329765)
     alias i2 = UInt64(58587104)
@@ -228,11 +227,6 @@ fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
         for i in range(m):
             bm.append(mint(b[i]))
         c1 = convolution(am, bm)
-        # for i in range(len(c1)):
-        #     if i:
-        #         print(end=" ")
-        #     print(c1[i], end="")
-        # print()
 
     @parameter
     if True:
@@ -256,7 +250,7 @@ fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
             bm.append(mint(b[i]))
         c3 = convolution(am, bm)
 
-    var c = List[Int](0) * (n + m - 1)
+    var c = List[Int](capacity=n + m - 1)
     for i in range(n + m - 1):
         var x = UInt64(0)
         x += (c1[i] * StaticModint[754974721](i1)).valu64() * M2M3
@@ -265,5 +259,5 @@ fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
         var diff = (c1[i] - StaticModint[754974721](x)).val()
         alias offset = List[UInt64](0, 0, M1M2M3, 2 * M1M2M3, 3 * M1M2M3)
         x -= offset[diff % 5]
-        c[i] = Int(x)
+        c.append(Int(x))
     return c

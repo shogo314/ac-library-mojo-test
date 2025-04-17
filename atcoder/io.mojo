@@ -1,3 +1,12 @@
+from atcoder.method_traits import HasInitStringRaising
+
+
+trait HasInitStringRaisingCollectionElement(
+    HasInitStringRaising, CollectionElement
+):
+    pass
+
+
 struct IO:
     var buff: String
     var idx: Int
@@ -33,6 +42,20 @@ struct IO:
 
     fn nextInt(mut self) raises -> Int:
         return Int(self.next())
+
+    fn nextListInt(mut self, n: Int) raises -> List[Int]:
+        var res = List[Int](capacity=n)
+        for i in range(n):
+            res.append(self.nextInt())
+        return res
+
+    fn nextList[
+        T: HasInitStringRaisingCollectionElement
+    ](mut self, n: Int) raises -> List[T]:
+        var res = List[T](capacity=n)
+        for i in range(n):
+            res.append(T(self.next()))
+        return res
 
     @staticmethod
     fn print[S: WritableCollectionElement](v: List[S]):
