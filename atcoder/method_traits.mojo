@@ -56,5 +56,13 @@ trait HasEqCollectionElement(CollectionElement, HasEq):
     pass
 
 
-trait AddGroup(CollectionElement, Defaultable, HasAdd, HasNeg):
+trait AddMonoid(CollectionElement, Defaultable, HasAdd):
+    pass
+
+
+trait MulMonoid(CollectionElement, HasInitInt, HasMul):
+    pass
+
+
+trait AddGroup(AddMonoid, HasNeg):
     pass

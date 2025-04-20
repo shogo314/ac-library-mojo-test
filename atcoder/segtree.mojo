@@ -2,9 +2,8 @@ from testing import assert_true
 
 from atcoder.internal_bit import bit_ceil, countr_zero
 from atcoder.method_traits import (
-    HasAdd,
-    HasInitInt,
-    HasMul,
+    AddMonoid,
+    MulMonoid,
     HasLtCollectionElement,
 )
 from atcoder.py.operator import add, mul
@@ -73,20 +72,20 @@ struct Segtree[S: CollectionElement]:
         return self.d[1]
 
 
-trait RSumQElement(CollectionElement, Defaultable, HasAdd):
-    pass
-
-
-fn RSumQ[S: RSumQElement](n: Int) -> Segtree[S]:
+fn RSumQ[S: AddMonoid](n: Int) -> Segtree[S]:
     return Segtree[S](n, add[S], S())
 
 
-trait RMulQElement(CollectionElement, HasInitInt, HasMul):
-    pass
+fn RSumQ[S: AddMonoid](v: List[S]) -> Segtree[S]:
+    return Segtree[S](v, add[S], S())
 
 
-fn RMulQ[S: RMulQElement](n: Int) -> Segtree[S]:
+fn RMulQ[S: MulMonoid](n: Int) -> Segtree[S]:
     return Segtree[S](n, mul[S], S(1))
+
+
+fn RMulQ[S: MulMonoid](v: List[S]) -> Segtree[S]:
+    return Segtree[S](v, mul[S], S(1))
 
 
 fn RMaxQ[S: HasLtCollectionElement](n: Int, MIN: S) -> Segtree[S]:
@@ -99,6 +98,16 @@ fn RMaxQ[S: HasLtCollectionElement](n: Int, MIN: S) -> Segtree[S]:
     return Segtree[S](n, op, MIN)
 
 
+fn RMaxQ[S: HasLtCollectionElement](v: List[S], MIN: S) -> Segtree[S]:
+    fn op(x: S, y: S) -> S:
+        if x < y:
+            return y
+        else:
+            return x
+
+    return Segtree[S](v, op, MIN)
+
+
 fn RMinQ[S: HasLtCollectionElement](n: Int, MAX: S) -> Segtree[S]:
     fn op(x: S, y: S) -> S:
         if y < x:
@@ -107,3 +116,13 @@ fn RMinQ[S: HasLtCollectionElement](n: Int, MAX: S) -> Segtree[S]:
             return x
 
     return Segtree[S](n, op, MAX)
+
+
+fn RMinQ[S: HasLtCollectionElement](v: List[S], MAX: S) -> Segtree[S]:
+    fn op(x: S, y: S) -> S:
+        if y < x:
+            return y
+        else:
+            return x
+
+    return Segtree[S](v, op, MAX)

@@ -1,3 +1,5 @@
+from atcoder.ext.avltree import AVLTree
+from atcoder.ext.dualsegtree import DualSegtree, RAddQ, RUpdateQ
 from atcoder.ext.interval_heap import IntervalHeap
 from atcoder.ext.knapsack import knapsack, knapsack_01
 from atcoder.ext.longest_increasing_subsequence import (

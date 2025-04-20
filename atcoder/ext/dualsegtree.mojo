@@ -2,7 +2,7 @@ from testing import assert_true
 from collections import Optional
 
 from atcoder.internal_bit import bit_ceil, countr_zero
-from atcoder.method_traits import HasAdd
+from atcoder.method_traits import AddMonoid
 from atcoder.py.operator import add
 
 
@@ -108,11 +108,7 @@ struct DualSegtree[S: CollectionElement, F: CollectionElement]:
         self.lz[k] = self.id
 
 
-trait RAddQElement(CollectionElement, Defaultable, HasAdd):
-    pass
-
-
-fn RAddQ[S: RAddQElement](n: Int) -> DualSegtree[S, S]:
+fn RAddQ[S: AddMonoid](n: Int) -> DualSegtree[S, S]:
     return DualSegtree[S](n, S(), add[S], add[S], S())
 
 
