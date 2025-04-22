@@ -178,7 +178,7 @@ fn _convolution_fft[
     return a
 
 
-fn convolution[
+fn convolution_mod[
     M: Int
 ](a: List[StaticModint[M]], b: List[StaticModint[M]]) raises -> List[
     StaticModint[M]
@@ -237,7 +237,7 @@ fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
         var bm = List[mint]()
         for i in range(m):
             bm.append(mint(b[i]))
-        c2 = convolution(am, bm)
+        c2 = convolution_mod(am, bm)
 
     @parameter
     if True:
@@ -248,7 +248,7 @@ fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
         var bm = List[mint]()
         for i in range(m):
             bm.append(mint(b[i]))
-        c3 = convolution(am, bm)
+        c3 = convolution_mod(am, bm)
 
     var c = List[Int](capacity=n + m - 1)
     for i in range(n + m - 1):
