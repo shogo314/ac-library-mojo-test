@@ -1,4 +1,4 @@
-from atcoder.py.builtin import _pow_mod_64
+from atcoder.py.builtin import pow_mod
 
 
 def _miller_rabin(n: Int, l: List[Int]) -> Bool:
