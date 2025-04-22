@@ -1,46 +1,4 @@
-fn pow_mod(x: Int, n: Int, m: Int) -> Int:
-    if m == 1:
-        return 0
-    var r = 1
-    var y = x % m
-    var n_ = n
-    while n_:
-        if n_ & 1:
-            r = r * y % m
-        y = y * y % m
-        n_ = n_ >> 1
-    return r
-
-# struct barrett:
-#     var _m: UInt32
-#     var im: UInt64
-    
-#     def __init__(out self, m: UInt32):
-#         self._m = m
-#         self.im = UInt(-1) // UInt64(m) + 1
-
-# fn _is_prime(n: Int) -> Bool:
-#     if n <= 1:
-#         return False
-#     if n == 2 or n == 7 or n == 61:
-#         return True
-#     if n % 2 == 0:
-#         return False
-
-#     d = n - 1
-#     while d % 2 == 0:
-#         d //= 2
-
-#     for a in List[Int](2, 7, 61):
-#         t = d
-#         y = pow(a, t, n)
-#         while t != n - 1 and y != 1 and y != n - 1:
-#             y = y * y % n
-#             t <<= 1
-#         if y != n - 1 and t % 2 == 0:
-#             return False
-#     return True
-
+from atcoder.py.builtin import pow_mod
 
 fn _inv_gcd(a: Int, b: Int) -> (Int, Int):
     var s = b
@@ -95,7 +53,10 @@ fn _primitive_root(m: Int) -> Int:
     var g = 2
     while True:
         for i in range(cnt):
-            if pow_mod(g, (m - 1) // divs[i], m) == 1:
+            try:
+                if pow_mod(g, (m - 1) // divs[i], m) == 1:
+                    break
+            except:
                 break
         else:
             return g
