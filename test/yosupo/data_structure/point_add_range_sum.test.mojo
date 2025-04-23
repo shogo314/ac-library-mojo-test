@@ -8,10 +8,8 @@ fn main() raises:
     var io = IO()
     var N = io.nextInt()
     var Q = io.nextInt()
-    var bit = FenwickTree[Int](N)
-    for i in range(N):
-        var a = io.nextInt()
-        bit.add(i, a)
+    var a = io.nextListInt(N)
+    var bit = FenwickTree[Int](a)
     for _ in range(Q):
         var t = io.nextInt()
         if t == 0:
