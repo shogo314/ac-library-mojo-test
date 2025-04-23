@@ -11,7 +11,7 @@ struct TwoSat:
         self._n = n
         self._scc = _SCCGraph(2 * n)
         self._answer = List[Bool]()
-        self._answer.resize(2 * n, False)
+        self._answer.resize(n, False)
 
     fn add_clause(mut self, i: Int, f: Bool, j: Int, g: Bool) raises:
         assert_true(0 <= i < self._n)

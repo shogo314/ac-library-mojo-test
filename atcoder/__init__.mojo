@@ -15,5 +15,6 @@ from atcoder.modint import (
 from atcoder.scc import SCCGraph
 from atcoder.segtree import Segtree, RSumQ, RMulQ, RMaxQ, RMinQ
 from atcoder.string import z_algorithm
+from atcoder.twosat import TwoSat
 
 from atcoder.ext import *

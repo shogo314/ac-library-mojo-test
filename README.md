@@ -17,9 +17,9 @@ name = "mojo"
 platforms = ["linux-64"]
 
 [dependencies]
-max = "=25.1.0"
+max = "=25.2.0"
 
-```
+``
 
 ### .verify-helper/config.toml
 
@@ -83,23 +83,22 @@ VSCode には Mojo の公式拡張があるのでそれを使うとよいです�
 
 ## 整備状況
 
-| file                 | 備考                                           | 
-| -------------------- | ---------------------------------------------- | 
-| dsu                  | 完了                                           | 
-| fenwicktree          | 完了                                           | 
-| internal_bit         | 完了（改良の余地はあるかも）                   | 
-| internal_csr         | 未着手                                         | 
-| internal_math        | 途中                                           | 
-| internal_queue       | 必要かは不明（要検証）                         | 
-| internal_scc         | 未着手                                         | 
+| file                 | 備考 | 
+| -------------------- | --- | 
+| dsu                  | :heavy_check_mark: | 
+| fenwicktree          | :heavy_check_mark: | 
+| internal_bit         | :heavy_check_mark: | 
+| internal_csr         | :heavy_check_mark: | 
+| internal_math        | 途中 | 
+| internal_scc         | :heavy_check_mark: | 
 | internal_type_traits | 目的を変えて整備（別のファイルに移行するかも） | 
-| io                   | 独自作成（改良の余地あり）                     | 
-| lazysegtree          | 完了（テンプレをある程度提供したい）           | 
-| math                 | 途中                                           | 
-| maxflow              | min_cutがまだ                                  | 
-| mincostflow          | 未着手                                         | 
-| modint               | 完成（改良の余地はあるかも）                   | 
-| scc                  | 未着手                                         | 
-| segtree              | 完了（テンプレをある程度提供したい）           | 
-| string               | 途中                                           | 
-| twosat               | 未着手                                         | 
+| io                   | 独自作成（改良の余地あり） | 
+| lazysegtree          | `max_right` と `min_left` がまだ | 
+| math                 | :x: | 
+| maxflow              | `min_cut` がまだ | 
+| mincostflow          | `Int` だけ対応 | 
+| modint               | :heavy_check_mark: | 
+| scc                  | :heavy_check_mark: | 
+| segtree              | `max_right` と `min_left` がまだ | 
+| string               | 途中 | 
+| twosat               | :heavy_check_mark: | 
