@@ -226,7 +226,7 @@ fn convolution_int(a: List[Int], b: List[Int]) raises -> List[Int]:
         var bm = List[mint]()
         for i in range(m):
             bm.append(mint(b[i]))
-        c1 = convolution(am, bm)
+        c1 = convolution_mod(am, bm)
 
     @parameter
     if True:

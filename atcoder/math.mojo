@@ -1,70 +1,42 @@
 from testing import assert_true
 
-from atcoder._math import pow_mod
+from atcoder._math import _inv_gcd
+from atcoder.py.builtin import pow_mod
 
 
-# fn inv_mod(x: Int, m: Int) -> Int:
-#     assert 1 <= m
-
-#     z = atcoder.Internal_math._inv_gcd(x, m)
-
-#     assert z[0] == 1
-
-#     return z[1]
+fn inv_mod(x: Int, m: Int) raises -> Int:
+    assert_true(1 <= m)
+    var z = atcoder._math._inv_gcd(x, m)
+    assert_true(z[0] == 1)
+    return z[1]
 
 
-# fn crt(r: List[Int], m: List[Int]) -> Tuple[Int, Int]:
-#     assert len(r) == len(m)
-
-#     # Contracts: 0 <= r0 < m0
-#     r0 = 0
-#     m0 = 1
-#     for r1, m1 in zip(r, m):
-#         assert 1 <= m1
-#         r1 %= m1
-#         if m0 < m1:
-#             r0, r1 = r1, r0
-#             m0, m1 = m1, m0
-#         if m0 % m1 == 0:
-#             if r0 % m1 != r1:
-#                 return (0, 0)
-#             continue
-
-#         # assume: m0 > m1, lcm(m0, m1) >= 2 * max(m0, m1)
-
-#         '''
-#         (r0, m0), (r1, m1) -> (r2, m2 = lcm(m0, m1));
-#         r2 % m0 = r0
-#         r2 % m1 = r1
-#         -> (r0 + x*m0) % m1 = r1
-#         -> x*u0*g % (u1*g) = (r1 - r0) (u0*g = m0, u1*g = m1)
-#         -> x = (r1 - r0) / g * inv(u0) (mod u1)
-#         '''
-
-#         # im = inv(u0) (mod u1) (0 <= im < u1)
-#         g, im = atcoder.Internal_math._inv_gcd(m0, m1)
-
-#         u1 = m1 // g
-#         # |r1 - r0| < (m0 + m1) <= lcm(m0, m1)
-#         if (r1 - r0) % g:
-#             return (0, 0)
-
-#         # u1 * u1 <= m1 * m1 / g / g <= m0 * m1 / g = lcm(m0, m1)
-#         x = (r1 - r0) // g % u1 * im % u1
-
-#         '''
-#         |r0| + |m0 * x|
-#         < m0 + m0 * (u1 - 1)
-#         = m0 + m0 * m1 / g - m0
-#         = lcm(m0, m1)
-#         '''
-
-#         r0 += x * m0
-#         m0 *= u1  # -> lcm(m0, m1)
-#         if r0 < 0:
-#             r0 += m0
-
-#     return (r0, m0)
+fn crt(r: List[Int], m: List[Int]) raises -> (Int, Int):
+    assert_true(len(r) == len(m))
+    var n = len(r)
+    var r0 = 0
+    var m0 = 1
+    for i in range(n):
+        assert_true(1 <= m[i])
+        var r1 = r[i] % m[i]
+        var m1 = m[i]
+        if m0 < m1:
+            r0, r1 = r1, r0
+            m0, m1 = m1, m0
+        if m0 % m1 == 0:
+            if r0 % m1 != r1:
+                return (0, 0)
+            continue
+        var tmp = _inv_gcd(m0, m1)
+        var g = tmp[0]
+        var im = tmp[1]
+        var u1 = m1 // g
+        if (r1 - r0) % g != 0:
+            return (0, 0)
+        var x = (r1 - r0) // g % u1 * im % u1
+        r0 += x * m0
+        m0 *= u1
+    return (r0, m0)
 
 
 fn floor_sum(n: Int, m: Int, a: Int, b: Int) raises -> Int:
