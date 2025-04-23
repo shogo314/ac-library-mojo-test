@@ -10,4 +10,4 @@ fn main() raises:
     var io = IO()
     var n = io.nextInt()
     var a = io.nextListInt(n)
-    print(longest_increasing_subsequence(a))
+    print(len(longest_increasing_subsequence(a)))
