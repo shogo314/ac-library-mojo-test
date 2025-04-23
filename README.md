@@ -83,22 +83,18 @@ VSCode には Mojo の公式拡張があるのでそれを使うとよいです�
 
 ## 整備状況
 
-| file                 | 備考 | 
-| -------------------- | --- | 
-| dsu                  | :heavy_check_mark: | 
-| fenwicktree          | :heavy_check_mark: | 
-| internal_bit         | :heavy_check_mark: | 
-| internal_csr         | :heavy_check_mark: | 
-| internal_math        | 途中 | 
-| internal_scc         | :heavy_check_mark: | 
-| internal_type_traits | 目的を変えて整備（別のファイルに移行するかも） | 
-| io                   | 独自作成（改良の余地あり） | 
-| lazysegtree          | `max_right` と `min_left` がまだ | 
-| math                 | :x: | 
-| maxflow              | `min_cut` がまだ | 
-| mincostflow          | `Int` だけ対応 | 
-| modint               | :heavy_check_mark: | 
-| scc                  | :heavy_check_mark: | 
-| segtree              | `max_right` と `min_left` がまだ | 
-| string               | 途中 | 
-| twosat               | :heavy_check_mark: | 
+| file                 | 備考 |
+| -------------------- | --- |
+| dsu                  | :heavy_check_mark: |
+| fenwicktree          | :heavy_check_mark: |
+| internal_type_traits | 目的を変えて整備（別のファイルに移行するかも） |
+| io                   | 独自作成（改良の余地あり） |
+| lazysegtree          | `max_right` と `min_left` がまだ |
+| math                 | :heavy_check_mark: |
+| maxflow              | `min_cut` がまだ |
+| mincostflow          | `Int` だけ対応 |
+| modint               | :heavy_check_mark: |
+| scc                  | :heavy_check_mark: |
+| segtree              | `max_right` と `min_left` がまだ |
+| string               | 途中 |
+| twosat               | :heavy_check_mark: |
