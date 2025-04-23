@@ -12,6 +12,7 @@ from atcoder.modint import (
     modint1000000007,
     modint1000000009,
 )
+from atcoder.scc import SCCGraph
 from atcoder.segtree import Segtree, RSumQ, RMulQ, RMaxQ, RMinQ
 from atcoder.string import z_algorithm
 
