@@ -1,7 +1,7 @@
 from testing import assert_true
 from collections import Optional
 
-from atcoder.internal_bit import bit_ceil, countr_zero
+from atcoder._bit import bit_ceil, countr_zero
 from atcoder.method_traits import AddMonoid
 from atcoder.py.operator import add
 

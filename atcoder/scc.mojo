@@ -1,5 +1,5 @@
 from testing import assert_true
-from atcoder.internal_scc import _SCCGraph
+from atcoder._scc import _SCCGraph
 
 
 struct SCCGraph:

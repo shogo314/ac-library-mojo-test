@@ -1,7 +1,7 @@
 from testing import assert_true
 from collections import Deque
 
-from atcoder.internal_csr import CSR
+from atcoder._csr import CSR
 from atcoder.py.heapq import heappop, heappush
 
 alias Cap = Int

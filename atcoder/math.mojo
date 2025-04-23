@@ -1,6 +1,6 @@
 from testing import assert_true
 
-from atcoder.internal_math import pow_mod
+from atcoder._math import pow_mod
 
 
 # fn inv_mod(x: Int, m: Int) -> Int:

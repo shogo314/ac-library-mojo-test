@@ -1,7 +1,7 @@
 from testing import assert_true
 
-from atcoder.internal_bit import countr_zero, bit_ceil
-from atcoder.internal_math import _primitive_root
+from atcoder._bit import countr_zero, bit_ceil
+from atcoder._math import _primitive_root
 from atcoder.modint import StaticModint
 
 

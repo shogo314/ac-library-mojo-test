@@ -1,4 +1,4 @@
-from atcoder.internal_csr import CSR
+from atcoder._csr import CSR
 
 
 @value

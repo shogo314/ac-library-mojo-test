@@ -1,6 +1,6 @@
 from testing import assert_true
 
-from atcoder.internal_math import _inv_gcd
+from atcoder._math import _inv_gcd
 
 
 struct StaticModint[M: Int](WritableCollectionElement):

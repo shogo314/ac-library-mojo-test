@@ -1,6 +1,6 @@
 from testing import assert_true
 
-from atcoder.internal_bit import bit_ceil, countr_zero
+from atcoder._bit import bit_ceil, countr_zero
 from atcoder.method_traits import (
     AddMonoid,
     MulMonoid,
