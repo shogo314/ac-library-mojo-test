@@ -89,12 +89,12 @@ VSCode には Mojo の公式拡張があるのでそれを使うとよいです�
 | fenwicktree          | :heavy_check_mark: |
 | internal_type_traits | 目的を変えて整備（別のファイルに移行するかも） |
 | io                   | 独自作成（改良の余地あり） |
-| lazysegtree          | `max_right` と `min_left` がまだ |
+| lazysegtree          | `max_right` と `min_left` はまだ |
 | math                 | :heavy_check_mark: |
 | maxflow              | `min_cut` がまだ |
 | mincostflow          | `Int` だけ対応 |
 | modint               | :heavy_check_mark: |
 | scc                  | :heavy_check_mark: |
-| segtree              | `max_right` と `min_left` がまだ |
-| string               | 途中 |
+| segtree              | :heavy_check_mark: |
+| string               | :heavy_check_mark: |
 | twosat               | :heavy_check_mark: |
