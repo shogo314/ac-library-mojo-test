@@ -64,8 +64,6 @@ struct _SCCGraph:
                             if u == v:
                                 break
                         group_num += 1
-                    else:
-                        low[g.elist[i].dst] = min(low[g.elist[i].dst], low[v])
                 pre = v
         for i in range(self._n):
             ids[i] = group_num - 1 - ids[i]
