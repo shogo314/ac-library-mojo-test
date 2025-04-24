@@ -1,8 +1,6 @@
-# ac-library-mojo-test
+-> [ac-library-mojo](https://github.com/shogo314/ac-library-mojo)
 
-   ┏━━━━━━━━━━━━━━━━━┓  
--> ┃ [ac-library-mojo](https://github.com/shogo314/ac-library-mojo) ┃  
-   ┗━━━━━━━━━━━━━━━━━┛
+# ac-library-mojo-test
 
 # 開発者向け情報
 
